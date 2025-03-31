@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Detection and Fix Suggestion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bug Detection and Fix Suggestion</h1>
+    <p>Enter your code snippet below, and click "Analyze Code" to find out if it's buggy or get a suggestion for fixing it!</p>
+    <textarea id="codeInput" placeholder="Enter your code here..."></textarea>
+    <button onclick="analyzeCode()">Analyze Code</button>
+    <div id="output" class="output"></div>
+
+    <script>
+        async function analyzeCode() {
+            const code = document.getElementById("codeInput").value;
+
+            // Validate input
+            if (!code.trim()) {
+                document.getElementById("output").innerHTML = "<strong>Error:</strong> Please enter some code to analyze!";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/analyze-code", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ code: code })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server Error: ${response.status} ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                let output = `<strong>Status:</strong> ${result.status}<br>`;
+                if (result.suggested_fix) {
+                    output += `<strong>Suggested Fix:</strong><pre>${result.suggested_fix}</pre>`;
+                } else {
+                    output += `<strong>Message:</strong> No issues found in the code!`;
+                }
+
+                document.getElementById("output").innerHTML = output;
+            } catch (error) {
+                document.getElementById("output").innerHTML = `<strong>Error:</strong> ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
