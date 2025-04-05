@@ -30,12 +30,18 @@ Installation
 3.Download Pre-Trained Models: Ensure the required models (e.g., CodeBERT, CodeGPT) are downloaded and accessible in the correct directory.
 
 4.Run the Application:
+
   -cli:  python cli.py
+  
   -APP:  python -m uvicorn app:app --reload
+  
 License
+
 This project is released under a permissive open-source license (e.g., MIT), ensuring developers can use and extend the tool freely.
 
 Acknowledgments
+
 DEBUG was built using cutting-edge machine learning frameworks and pre-trained models like CodeBERT and CodeGPT. Special thanks to open-source contributors who make such advancements possible.
+
 --------------------------Important Note---------------------------
 The current version of the model is not fully trained due to limited computational resources. As a result, it may produce inconsistent or incorrect outputs when analyzing code snippets for bugs. This project is still under development, and we aim to refine the model and improve its accuracy in future updates
