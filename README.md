@@ -6,19 +6,29 @@ Key Features
  -Bug Detection:
     -Uses a trained deep learning model (based on CodeBERT) to classify whether a code snippet is "buggy" or "bug-free."
     -Handles a variety of errors, including syntax issues, logical bugs, and runtime errors.
+    
  -Fix Suggestion:
     -Provides intelligent recommendations for fixing detected bugs using a pre-trained generative model like CodeGPT.
     -Generates fixes for both simple and complex code issues
+    
  -Graphical User Interface (GUI):
     -A user-friendly GUI built using Tkinter for easy code input and output visualization.
     -Enables local execution without relying on terminal commands.
+
+    
 Installation
+
 1.Clone the Repository:
    git clone https://github.com/Rohan708/DEBUG.git
+   
    cd DEBUG
+   
 2. Install Dependencies: Use pip to install the required Python libraries:
+   
    pip install -r requirements.txt
+   
 3.Download Pre-Trained Models: Ensure the required models (e.g., CodeBERT, CodeGPT) are downloaded and accessible in the correct directory.
+
 4.Run the Application:
   -cli:  python cli.py
   -APP:  python -m uvicorn app:app --reload
